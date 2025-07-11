@@ -97,6 +97,17 @@ export default function Home() {
         return <UserDashboard user={user} onLogout={handleLogout} />
     }
   }
+ if (currentPage === "dashboard" && user) {
+    return renderDashboard()
+  }
+
+  if (currentPage === "register") {
+    return <RegisterPage onBack={() => setCurrentPage("login")} />
+  }
+
+  if (currentPage === "forgot-password") {
+    return <ForgotPasswordPage onBack={() => setCurrentPage("login")} />
+  }
 
   // If user is logged in, render the appropriate dashboard
   if (user) {
@@ -167,6 +178,27 @@ export default function Home() {
           <AuthButton type="submit" disabled={loading} className="w-full">
             {loading ? (
               <>
+  <div className="grid grid-cols-2 gap-4 pt-2">
+          <button
+            type="button"
+            onClick={() => setCurrentPage("register")}
+            className="w-full py-3 px-6 rounded-xl font-semibold text-white transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent bg-gradient-to-r from-[#25C2F7] to-[#4FC3F7] hover:from-[#1BA8E0] hover:to-[#29B6F6] focus:ring-blue-300"
+          >
+            Register
+          </button>
+          <button
+            type="button"
+            onClick={() => setCurrentPage("forgot-password")}
+            className="w-full py-3 px-6 rounded-xl font-semibold text-white transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent bg-gradient-to-r from-[#FF6A4D] to-[#F23A3A] hover:from-[#FF5722] hover:to-[#E53935] focus:ring-red-400"
+          >
+            Forgot Password
+          </button>
+        </div>
+      </form>
+    </AuthLayout>
+  )
+}
+
                 <LoadingSpinner size="sm" />
                 Signing in...
               </>
