@@ -4,7 +4,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Dashboard Shipment JNE',
   description: 'Created by Marketing JNE Cirebon',
-  generator: 'Ferrydwinurrochman',
+  generator: 'Ferrydwn',
 }
 
 export default function RootLayout({
