@@ -12,6 +12,8 @@ import AdminDashboard from "@/app/admin-dashboard"
 import DeveloperDashboard from "@/app/developer-dashboard"
 import EditorDashboard from "@/app/editor-dashboard"
 import UserDashboard from "@/app/user-dashboard"
+import RegisterPage from "./register"
+import ForgotPasswordPage from "./forgot-password"
 import { Eye, EyeOff, Info, UserIcon, Lock, Zap } from "lucide-react"
 
 type Page = "login" | "register" | "forgot-password" | "dashboard"
