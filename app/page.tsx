@@ -1,119 +1,103 @@
-"use client"
+import React, { useState, useEffect } from "react";
+import { authenticate, type User } from "@/lib/auth";
+import { AuthLayout } from "@/components/auth-layout";
+import { AuthInput } from "@/components/auth-input";
+import { AuthButton } from "@/components/auth-button";
+import { LoadingSpinner } from "@/components/loading-spinner";
+import AdminDashboard from "@/app/admin-dashboard";
+import DeveloperDashboard from "@/app/developer-dashboard";
+import EditorDashboard from "@/app/editor-dashboard";
+import UserDashboard from "@/app/user-dashboard";
+import RegisterPage from "./register";
+import ForgotPasswordPage from "./forgot-password";
+import { Eye, EyeOff, UserIcon, Lock } from "lucide-react";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { authenticate, getDefaultCredentials, type User } from "@/lib/auth"
-import { AuthLayout } from "@/components/auth-layout"
-import { AuthInput } from "@/components/auth-input"
-import { AuthButton } from "@/components/auth-button"
-import { LoadingSpinner } from "@/components/loading-spinner"
-import AdminDashboard from "@/app/admin-dashboard"
-import DeveloperDashboard from "@/app/developer-dashboard"
-import EditorDashboard from "@/app/editor-dashboard"
-import UserDashboard from "@/app/user-dashboard"
-import RegisterPage from "./register"
-import ForgotPasswordPage from "./forgot-password"
-import { Eye, EyeOff, UserIcon, Lock } from "lucide-react"
-
-type Page = "login" | "register" | "forgot-password" | "dashboard"
+type Page = "login" | "register" | "forgot-password" | "dashboard";
 
 export default function Home() {
-  const [user, setUser] = useState<User | null>(null)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [currentPage, setCurrentPage] = useState<Page>("login")
+  const [user, setUser] = useState<User | null>(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState<Page>("login");
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("currentUser")
-    if (savedUser) {
+    const saved = localStorage.getItem("currentUser");
+    if (saved) {
       try {
-        const parsedUser = JSON.parse(savedUser)
-        setUser(parsedUser)
-      } catch (error) {
-        console.error("Error parsing saved user:", error)
-        localStorage.removeItem("currentUser")
+        setUser(JSON.parse(saved));
+      } catch {
+        localStorage.removeItem("currentUser");
       }
     }
-  }, [])
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
-
+    e.preventDefault();
+    setLoading(true);
+    setError("");
     try {
-      const authenticatedUser = authenticate(username, password)
-      if (authenticatedUser) {
-        setUser(authenticatedUser)
-        localStorage.setItem("currentUser", JSON.stringify(authenticatedUser))
-        setUsername("")
-        setPassword("")
+      const authUser = authenticate(username, password);
+      if (authUser) {
+        setUser(authUser);
+        localStorage.setItem("currentUser", JSON.stringify(authUser));
+        setUsername("");
+        setPassword("");
       } else {
-        setError("Invalid username or password")
+        setError("Invalid username or password");
       }
-    } catch (error) {
-      setError("An error occurred during login")
-      console.error("Login error:", error)
+    } catch {
+      setError("An error occurred during login");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleLogout = () => {
-    setUser(null)
-    localStorage.removeItem("currentUser")
-    setUsername("")
-    setPassword("")
-    setError("")
-  }
+    setUser(null);
+    localStorage.removeItem("currentUser");
+    setUsername("");
+    setPassword("");
+    setError("");
+  };
 
   const renderDashboard = () => {
-    if (!user) return null
-
+    if (!user) return null;
     switch (user.role) {
       case "admin":
-        return <AdminDashboard user={user} onLogout={handleLogout} />
+        return <AdminDashboard user={user} onLogout={handleLogout} />;
       case "developer":
-        return <DeveloperDashboard user={user} onLogout={handleLogout} />
+        return <DeveloperDashboard user={user} onLogout={handleLogout} />;
       case "editor":
-        return <EditorDashboard user={user} onLogout={handleLogout} />
-      case "user":
+        return <EditorDashboard user={user} onLogout={handleLogout} />;
       default:
-        return <UserDashboard user={user} onLogout={handleLogout} />
+        return <UserDashboard user={user} onLogout={handleLogout} />;
     }
-  }
+  };
 
-  if (currentPage === "dashboard" && user) {
-    return renderDashboard()
+  if ((currentPage === "dashboard" && user) || user) {
+    return renderDashboard();
   }
 
   if (currentPage === "register") {
-    return <RegisterPage onBack={() => setCurrentPage("login")} />
+    return <RegisterPage onBack={() => setCurrentPage("login")} />;
   }
 
   if (currentPage === "forgot-password") {
-    return <ForgotPasswordPage onBack={() => setCurrentPage("login")} />
-  }
-
-  if (user) {
-    return renderDashboard()
+    return <ForgotPasswordPage onBack={() => setCurrentPage("login")} />;
   }
 
   return (
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
+        {/* Header with logo and title only */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <img src="/jne-icon.png" alt="JNE" className="h-12 w-12 mr-3" />
-            <div className="text-left">
-              <h1 className="text-2xl font-bold text-[#f00000]">JNE Dashboard</h1>
-              <p className="text-sm text-[#f00000]">Dashboard Shipment JNE Cirebon</p>
-            </div>
+            <h1 className="text-2xl font-bold text-[#f00000]">JNE Dashboard</h1>
           </div>
-          <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8 mx-auto mb-4" />
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -149,7 +133,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f00000] hover:text-[#f00000] dark:hover:text-[#f00000]"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f00000] hover:text-[#f00000]"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -188,6 +172,11 @@ export default function Home() {
               Forgot Password
             </button>
           </div>
+
+          {/* Tagline moved here, centered between buttons and footer */}
+          <div className="flex justify-center my-6">
+            <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8" />
+          </div>
         </form>
 
         <div className="mt-6 text-center">
@@ -195,5 +184,5 @@ export default function Home() {
         </div>
       </div>
     </AuthLayout>
-  )
+  );
 }
