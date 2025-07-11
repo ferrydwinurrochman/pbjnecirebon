@@ -86,15 +86,12 @@ export default function Home() {
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <img src="/jne-icon.png" alt="JNE" className="h-12 w-12 mr-3" />
-            <h1 className="text-2xl font-bold text-[#f00000]">JNE Dashboard</h1>
-          </div>
+          <img src="/jne-icon.png" alt="JNE Express" className="h-12 mx-auto mb-2" />
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-white/90 text-sm font-medium">
+            <label htmlFor="username" className="block text-white text-sm font-medium">
               Username
             </label>
             <AuthInput
@@ -109,7 +106,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-[#f00000] mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
               Password
             </label>
             <div className="relative">
@@ -125,7 +122,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f00000] hover:text-[#f00000]"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-500"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -165,7 +162,6 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Centered tagline image after buttons */}
           <div className="flex justify-center my-6">
             <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8" />
           </div>
