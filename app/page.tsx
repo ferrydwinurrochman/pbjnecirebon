@@ -14,6 +14,8 @@ import EditorDashboard from "@/app/editor-dashboard"
 import UserDashboard from "@/app/user-dashboard"
 import { Eye, EyeOff, Info, UserIcon, Lock, Zap } from "lucide-react"
 
+type Page = "login" | "register" | "forgot-password" | "dashboard"
+
 export default function Home() {
   const [user, setUser] = useState<User | null>(null)
   const [username, setUsername] = useState("")
