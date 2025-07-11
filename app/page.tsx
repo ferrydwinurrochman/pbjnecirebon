@@ -109,8 +109,12 @@ export default function Home() {
           <div className="flex items-center justify-center mb-4">
             <img src="/jne-icon.png" alt="JNE" className="h-12 w-12 mr-3" />
             <div className="text-left">
+              <h1 className="text-2xl font-bold text-[#f00000]">JNE Dashboard</h1>
               <p className="text-sm text-[#f00000]">Dashboard Shipment JNE Cirebon</p>
             </div>
+          </div>
+          <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8 mx-auto mb-4" />
+        </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
@@ -129,7 +133,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-white/90 text-sm font-medium">
+            <label htmlFor="password" className="block text-sm font-medium text-[#f00000] mb-2">
               Password
             </label>
             <div className="relative">
@@ -145,7 +149,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f00000] hover:text-[#f00000] dark:hover:text-[#f00000]"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -185,11 +189,7 @@ export default function Home() {
             </button>
           </div>
         </form>
-          
-          </div>
-          <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8 mx-auto mb-4" />
-        </div>
-                
+
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 JNE Dashboard. All rights reserved.</p>
         </div>
