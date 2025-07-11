@@ -109,8 +109,8 @@ export default function Home() {
           <div className="flex items-center justify-center mb-4">
             <img src="/jne-icon.png" alt="JNE" className="h-12 w-12 mr-3" />
             <div className="text-left">
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-white">JNE Dashboard</h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Shipment Management System</p>
+              <h1 className="text-2xl font-bold text-[#f00000]">JNE Dashboard</h1>
+              <p className="text-sm text-[#f00000]">Dashboard Shipment JNE Cirebon</p>
             </div>
           </div>
           <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8 mx-auto mb-4" />
@@ -118,7 +118,7 @@ export default function Home() {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="username" className="block text-white/90 text-sm font-medium">
               Username
             </label>
             <AuthInput
@@ -133,7 +133,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-[#f00000] mb-2">
               Password
             </label>
             <div className="relative">
@@ -149,7 +149,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#f00000] hover:text-[#f00000] dark:hover:text-[#f00000]"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
