@@ -1,8 +1,9 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { authenticate, type User } from "@/lib/auth";
 import { AuthLayout } from "@/components/auth-layout";
 import { AuthInput } from "@/components/auth-input";
-import { AuthButton } from "@/components/auth-button";
 import { LoadingSpinner } from "@/components/loading-spinner";
 import AdminDashboard from "@/app/admin-dashboard";
 import DeveloperDashboard from "@/app/developer-dashboard";
@@ -77,22 +78,13 @@ export default function Home() {
     }
   };
 
-  if ((currentPage === "dashboard" && user) || user) {
-    return renderDashboard();
-  }
-
-  if (currentPage === "register") {
-    return <RegisterPage onBack={() => setCurrentPage("login")} />;
-  }
-
-  if (currentPage === "forgot-password") {
-    return <ForgotPasswordPage onBack={() => setCurrentPage("login")} />;
-  }
+  if ((currentPage === "dashboard" && user) || user) return renderDashboard();
+  if (currentPage === "register") return <RegisterPage onBack={() => setCurrentPage("login")} />;
+  if (currentPage === "forgot-password") return <ForgotPasswordPage onBack={() => setCurrentPage("login")} />;
 
   return (
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
-        {/* Header with logo and title only */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <img src="/jne-icon.png" alt="JNE" className="h-12 w-12 mr-3" />
@@ -173,7 +165,7 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Tagline moved here, centered between buttons and footer */}
+          {/* Centered tagline image after buttons */}
           <div className="flex justify-center my-6">
             <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8" />
           </div>
