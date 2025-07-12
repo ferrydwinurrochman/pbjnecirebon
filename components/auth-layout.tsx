@@ -140,7 +140,7 @@ export function AuthLayout({ children, title = "Login - Dashboard Shipment JNE" 
       <div className="relative z-10 w-full max-w-md">
         <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 animate-fade-in hover:bg-white/12 transition-all duration-500">
           {/* Logo */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-2">
             <div className="inline-block transform hover:scale-105 transition-transform duration-300">
               <Image src="/logo.png" alt="JNE Express" width={120} height={60} className="mx-auto" />
             </div>
