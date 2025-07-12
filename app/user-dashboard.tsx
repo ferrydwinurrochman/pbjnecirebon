@@ -17,44 +17,54 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {
+    // Update available pages based on user permissions
     const allPages = getAllPages()
     const userPages = allPages.filter((page) => userCanAccessPage(user, page))
     setAvailablePages(userPages)
 
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000)
+    // Update time every minute
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000)
+
     return () => clearInterval(timer)
   }, [user])
 
-  const handlePageSelect = (pageId: string) => setCurrentPageId(pageId)
-  const handleHomeSelect = () => setCurrentPageId(null)
+  const handlePageSelect = (pageId: string) => {
+    setCurrentPageId(pageId)
+  }
+
+  const handleHomeSelect = () => {
+    setCurrentPageId(null)
+  }
 
   const getPageIcon = (pageType: string) => {
     switch (pageType) {
-      case "powerbi": return BarChart3
-      case "spreadsheet": return FileText
-      case "html": return Globe
-      default: return FileText
+      case "powerbi":
+        return BarChart3
+      case "spreadsheet":
+        return FileText
+      case "html":
+        return Globe
+      default:
+        return FileText
     }
   }
 
   const getPageColor = (pageType: string) => {
     switch (pageType) {
-      case "powerbi": return "from-blue-500 to-blue-600"
-      case "spreadsheet": return "from-green-500 to-green-600"
-      case "html": return "from-purple-500 to-purple-600"
-      default: return "from-gray-500 to-gray-600"
+      case "powerbi":
+        return "from-blue-500 to-blue-600"
+      case "spreadsheet":
+        return "from-green-500 to-green-600"
+      case "html":
+        return "from-purple-500 to-purple-600"
+      default:
+        return "from-gray-500 to-gray-600"
     }
   }
 
   const currentPage = currentPageId ? availablePages.find((p) => p.id === currentPageId) : null
-
-  const formatDate = (date: Date | undefined) => {
-    try {
-      return date ? new Date(date).toLocaleDateString() : "-"
-    } catch {
-      return "-"
-    }
-  }
 
   if (currentPage) {
     return (
@@ -72,6 +82,7 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Header */}
       <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -82,6 +93,7 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
                 <p className="text-sm text-gray-500 dark:text-gray-400">Welcome, {user.name}</p>
               </div>
             </div>
+
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <div className="text-sm font-medium text-gray-800 dark:text-white">
@@ -89,6 +101,7 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
                 </div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">{currentTime.toLocaleDateString()}</div>
               </div>
+
               <button
                 onClick={onLogout}
                 className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
@@ -100,7 +113,9 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24">
+        {/* User Info Card */}
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 p-6 mb-8">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -116,16 +131,22 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
                 </div>
                 <div className="flex items-center gap-2">
                   {user.isActive ? (
-                    <><CheckCircle className="w-4 h-4 text-green-500" /><span className="text-sm text-green-600 dark:text-green-400">Active</span></>
+                    <>
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      <span className="text-sm text-green-600 dark:text-green-400">Active</span>
+                    </>
                   ) : (
-                    <><AlertCircle className="w-4 h-4 text-red-500" /><span className="text-sm text-red-600 dark:text-red-400">Inactive</span></>
+                    <>
+                      <AlertCircle className="w-4 h-4 text-red-500" />
+                      <span className="text-sm text-red-600 dark:text-red-400">Inactive</span>
+                    </>
                   )}
                 </div>
                 {user.lastLogin && (
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-gray-400" />
                     <span className="text-sm text-gray-500 dark:text-gray-400">
-                      Last login: {formatDate(user.lastLogin)}
+                      Last login: {user.lastLogin.toLocaleDateString()}
                     </span>
                   </div>
                 )}
@@ -134,6 +155,7 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
           </div>
         </div>
 
+        {/* Available Pages */}
         {availablePages.length > 0 ? (
           <div>
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Your Dashboard Pages</h3>
@@ -151,7 +173,9 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
                   >
                     <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 p-6 h-full hover:shadow-xl transition-shadow">
                       <div className="flex items-center gap-4 mb-4">
-                        <div className={`w-12 h-12 bg-gradient-to-br ${gradientColor} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                        <div
+                          className={`w-12 h-12 bg-gradient-to-br ${gradientColor} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}
+                        >
                           <Icon className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex-1">
@@ -159,13 +183,17 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
                             {page.title}
                           </h4>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {page.type.toUpperCase()} • {page.subType?.toUpperCase() || ""}
+                            {page.type.toUpperCase()} • {page.subType?.toUpperCase()}
                           </p>
                         </div>
                       </div>
+
                       <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">{page.content}</p>
+
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">Updated: {formatDate(page.updatedAt)}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                          Updated: {page.updatedAt.toLocaleDateString()}
+                        </span>
                         <div className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-xs font-medium">
                           Click to Open
                         </div>
@@ -183,12 +211,14 @@ export default function UserDashboard({ user, onLogout }: UserDashboardProps) {
             </div>
             <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">No Pages Available</h3>
             <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
-              You don't have access to any dashboard pages yet. Please contact your administrator to get access.
+              You don't have access to any dashboard pages yet. Please contact your administrator to get access to the
+              pages you need.
             </p>
           </div>
         )}
       </div>
 
+      {/* Bottom Navigation */}
       <BottomNavigation
         user={user}
         currentPageId={currentPageId}
