@@ -37,13 +37,145 @@ export interface ActivityLog {
   ipAddress?: string;
 }
 
+// Mock data storage
 const users: User[] = [
-  // ... your user data (same as original)
-];
+  {
+    id: "1",
+    username: "admin",
+    name: "System Administrator",
+    role: "admin",
+    isActive: true,
+    createdAt: new Date("2024-01-01"),
+    lastLogin: new Date(),
+    email: "admin@jne.co.id",
+    phone: "+62-21-1234567",
+    permissions: ["*"],
+  },
+  {
+    id: "2",
+    username: "developer",
+    name: "Lead Developer",
+    role: "developer",
+    isActive: true,
+    createdAt: new Date("2024-01-01"),
+    lastLogin: new Date(),
+    email: "dev@jne.co.id",
+    phone: "+62-21-1234568",
+    permissions: ["users.view", "users.create", "users.edit", "pages.*", "system.edit"],
+  },
+  {
+    id: "3",
+    username: "editor",
+    name: "Content Editor",
+    role: "editor",
+    isActive: true,
+    createdAt: new Date("2024-01-01"),
+    lastLogin: new Date(),
+    email: "editor@jne.co.id",
+    phone: "+62-21-1234569",
+    permissions: ["pages.view", "pages.edit"], },
+  {
+    id: "4",
+    username: "user1",
+    name: "John Doe",
+    role: "user",
+    isActive: true,
+    createdAt: new Date("2024-01-15"),
+    lastLogin: new Date(),
+    email: "john.doe@jne.co.id",
+    phone: "+62-21-1234570",
+    assignedPages: ["1", "2"],
+  },
+  {
+    id: "5",
+    username: "user2",
+    name: "Jane Smith",
+    role: "user",
+    isActive: true,
+    createdAt: new Date("2024-01-20"),
+    lastLogin: new Date(),
+    email: "jane.smith@jne.co.id",
+    phone: "+62-21-1234571",
+    assignedPages: ["1", "3"],
+  },
+  {
+    id: "6",
+    username: "user3",
+    name: "Bob Wilson",
+    role: "user",
+    isActive: false,
+    createdAt: new Date("2024-02-01"),
+    email: "bob.wilson@jne.co.id",
+    phone: "+62-21-1234572",
+    assignedPages: ["2"],
+  },
+]
 
 const pages: Page[] = [
-  // ... your page data (same as original)
-];
+ {
+    id: "1",
+    title: "Sales Dashboard",
+    type: "powerbi",
+    subType: "analytics",
+    content: "Comprehensive sales analytics and performance metrics for JNE shipment services",
+    embedUrl: "https://app.powerbi.com/embed/sample-sales-dashboard",
+    isActive: true,
+    createdAt: new Date("2024-01-01"),
+    updatedAt: new Date("2024-01-15"),
+    createdBy: "1",
+    assignedUsers: ["4", "5"],
+  },
+  {
+    id: "2",
+    title: "Shipment Tracking",
+    type: "spreadsheet",
+    subType: "operational",
+    content: "Real-time shipment tracking and logistics management system",
+    embedUrl: "https://docs.google.com/spreadsheets/d/sample-tracking-sheet",
+    isActive: true,
+    createdAt: new Date("2024-01-05"),
+    updatedAt: new Date("2024-01-20"),
+    createdBy: "1",
+    assignedUsers: ["4", "6"],
+  },
+  {
+    id: "3",
+    title: "Customer Portal",
+    type: "html",
+    subType: "customer-facing",
+    content: "Customer service portal with shipment information and support tools",
+    htmlContent: `
+      <div style="padding: 20px; font-family: Arial, sans-serif;">
+        <h2 style="color: #e31e24;">JNE Customer Portal</h2>
+        <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+          <h3>Track Your Shipment</h3>
+          <input type="text" placeholder="Enter tracking number" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+          <button style="background: #e31e24; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Track Now</button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h4>Express Delivery</h4>
+            <p>Same day delivery for urgent packages</p>
+          </div>
+          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h4>Regular Service</h4>
+            <p>Standard delivery within 2-3 business days</p>
+          </div>
+          <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h4>Economy</h4>
+            <p>Cost-effective solution for non-urgent items</p>
+          </div>
+        </div>
+      </div>
+    `,
+    isActive: true,
+    createdAt: new Date("2024-01-10"),
+    updatedAt: new Date("2024-01-25"),
+    createdBy: "2",
+    assignedUsers: ["5"],
+  },
+]
+        
 
 let activityLogs: ActivityLog[] = [];
 
