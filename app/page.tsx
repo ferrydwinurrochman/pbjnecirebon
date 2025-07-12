@@ -107,7 +107,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-white">
               Password
             </label>
             <div className="relative">
