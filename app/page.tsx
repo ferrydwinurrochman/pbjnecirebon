@@ -85,7 +85,7 @@ export default function Home() {
   return (
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
-        <div className="text-center mb-2">
+        <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-white">Dashboard Shipment JNE</h1>
             <p className="text-sm text-gray-300 mt-2">Summary, Performance & Data All Shipment JNE Cirebon</p>
         </div>
