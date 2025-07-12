@@ -86,7 +86,6 @@ export default function Home() {
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
         <div className="text-center mb-8">
-          <img src="/jne-icon.png" alt="JNE Express" className="h-12 mx-auto mb-2" />
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
