@@ -86,14 +86,6 @@ export default function Home() {
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
         <div className="text-center mb-8 pt-6">
-          <img
-            src="/logo.png"
-            alt="JNE Express"
-            className="mx-auto mb-2"
-            width={120}
-            height={60}
-            style={{ color: "transparent" }}
-          />
           <h1 className="text-2xl font-bold text-white">Dashboard Shipment JNE</h1>
           <p className="text-sm text-gray-300">Summary, Performance & Data All Shipment JNE Cirebon</p>
         </div>
