@@ -39,6 +39,7 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     setError("");
+
     try {
       const authUser = authenticate(username, password);
       if (authUser) {
@@ -84,14 +85,16 @@ export default function Home() {
 
   return (
     <AuthLayout>
-      <div className="w-full max-w-md mx-auto">
-        <div className="text-center mb-8">
+      <div className="w-full max-w-md mx-auto px-6 py-10">
+        <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-white">Dashboard Shipment JNE</h1>
-            <p className="text-sm text-gray-300 mt-2">Summary, Performance & Data All Shipment JNE Cirebon</p>
+          <p className="text-sm text-gray-300 mt-2">
+            Summary, Performance & Data All Shipment JNE Cirebon
+          </p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
-          <div>
+          <div className="space-y-2">
             <label htmlFor="username" className="block text-white text-sm font-medium">
               Username
             </label>
@@ -106,8 +109,8 @@ export default function Home() {
             />
           </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
+          <div className="space-y-2">
+            <label htmlFor="password" className="block text-white text-sm font-medium">
               Password
             </label>
             <div className="relative">
@@ -123,7 +126,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-500"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -131,45 +134,47 @@ export default function Home() {
           </div>
 
           {error && (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
+            <div className="bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-md p-3">
               <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
             </div>
           )}
 
-          <div className="pt-4">
+          <div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-6 rounded-xl font-semibold text-white transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent bg-gradient-to-r from-[#25C2F7] to-[#1877F2] hover:from-[#1BA8E0] hover:to-[#1565C0] focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-[#25C2F7] to-[#1877F2] hover:from-[#1BA8E0] hover:to-[#1565C0] transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? <LoadingSpinner /> : "Access Dashboard"}
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 pt-4">
+          <div className="grid grid-cols-2 gap-4">
             <button
               type="button"
               onClick={() => setCurrentPage("register")}
-              className="w-full py-3 px-6 rounded-xl font-semibold text-white transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent bg-gradient-to-r from-[#25C2F7] to-[#4FC3F7] hover:from-[#1BA8E0] hover:to-[#29B6F6] focus:ring-blue-300"
+              className="w-full py-3 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-[#25C2F7] to-[#4FC3F7] hover:from-[#1BA8E0] hover:to-[#29B6F6] transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
               Register
             </button>
             <button
               type="button"
               onClick={() => setCurrentPage("forgot-password")}
-              className="w-full py-3 px-6 rounded-xl font-semibold text-white transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent bg-gradient-to-r from-[#FF6A4D] to-[#F23A3A] hover:from-[#FF5722] hover:to-[#E53935] focus:ring-red-400"
+              className="w-full py-3 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-[#FF6A4D] to-[#F23A3A] hover:from-[#FF5722] hover:to-[#E53935] transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400"
             >
               Forgot Password
             </button>
           </div>
 
-          <div className="flex justify-center my-6">
+          <div className="flex justify-center pt-6">
             <img src="/jne-tagline.png" alt="JNE Tagline" className="h-8" />
           </div>
         </form>
 
-        <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 JNE Cirebon Dashboard Shipment. All rights reserved.</p>
+        <div className="mt-8 text-center">
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            © 2025 JNE Cirebon Dashboard Shipment. All rights reserved.
+          </p>
         </div>
       </div>
     </AuthLayout>
