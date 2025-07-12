@@ -87,6 +87,7 @@ export default function Home() {
       <div className="w-full max-w-md mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-white">Dashboard Shipment JNE</h1>
+            <p className="text-sm text-gray-300 mt-2">Summary, Performance & Data All Shipment JNE Cirebon</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -168,7 +169,7 @@ export default function Home() {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 JNE Dashboard. All rights reserved.</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 JNE Cirebon Dashboard Shipment. All rights reserved.</p>
         </div>
       </div>
     </AuthLayout>
