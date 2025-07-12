@@ -85,17 +85,8 @@ export default function Home() {
   return (
     <AuthLayout>
       <div className="w-full max-w-md mx-auto">
-        <div className="text-center mb-4 pt-4">
-          <img
-            src="/logo.png"
-            alt="JNE Express"
-            className="mx-auto mb-3"
-            width={120}
-            height={60}
-            style={{ color: "transparent" }}
-          />
+        <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-white">Dashboard Shipment JNE</h1>
-          <p className="text-sm text-gray-300 mt-2">Summary, Performance & Data All Shipment JNE Cirebon</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
